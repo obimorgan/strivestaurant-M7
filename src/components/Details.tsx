@@ -3,16 +3,16 @@ import { useParams } from 'react-router-dom'
 import dishes from '../data/menu.json'
 import DishComments from './DishComments'
 import { Col, Row, Container } from 'react-bootstrap'
-
+import { Dish } from "../Types/Dish"
 const Details = () => {
-  const [pasta, setPasta] = useState(undefined)
+  const [pasta, setPasta] = useState<Dish>()
 
   const params = useParams()
 
   useEffect(() => {
     let pastaId = params.pastaId
     let pastaToShow = dishes.find((pasta) => pasta.id.toString() === pastaId)
-    setPasta(pastaToShow)
+    setPasta(pastaToShow!)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
@@ -24,9 +24,9 @@ const Details = () => {
             <>
               <h1>{pasta.name}</h1>
               <h3>Pasta Details</h3>
-              <img src={pasta.image} alt='detail pic' className='my-3' />
+              {/* <img src={pasta.image} alt='detail pic' className='my-3' /> */}
               <p>{pasta.description}</p>
-              <DishComments selectedDish={pasta} />
+              <DishComments {...pasta} />
             </>
           ) : (
             <h2>404 - Pasta not found</h2>

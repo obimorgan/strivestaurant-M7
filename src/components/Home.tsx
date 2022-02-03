@@ -2,9 +2,17 @@ import { useState } from 'react'
 import { Carousel, Container, Col, Row } from 'react-bootstrap'
 import items from '../data/menu.json'
 import DishComments from './DishComments'
+import { Comment } from "../Types/Dish"
+
+
+interface StateSelectedDish{
+  id: number
+  comments: Comment[]
+}
+
 
 const Home = () => {
-  const [selectedDish, setSelectedDish] = useState(undefined)
+  const [selectedDish, setSelectedDish] = useState<StateSelectedDish>()
 
   return (
     <Container>

@@ -4,8 +4,15 @@ import Spinner from 'react-bootstrap/Spinner'
 import Alert from 'react-bootstrap/Alert'
 import { parseISO, format } from 'date-fns'
 
+interface Reservations {
+  _id: number
+  name: string
+  numberOfPeople: number
+  dateTime:string
+}
+
 const Reservations = () => {
-  const [reservations, setReservations] = useState([])
+  const [reservations, setReservations] = useState<Reservations[]>([])
   const [isLoading, setIsLoading] = useState(true)
   const [isError, setIsError] = useState(false)
 
