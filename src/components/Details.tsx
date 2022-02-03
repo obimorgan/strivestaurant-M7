@@ -4,6 +4,7 @@ import dishes from '../data/menu.json'
 import DishComments from './DishComments'
 import { Col, Row, Container } from 'react-bootstrap'
 import { Dish } from "../Types/Dish"
+
 const Details = () => {
   const [pasta, setPasta] = useState<Dish>()
 
@@ -11,8 +12,8 @@ const Details = () => {
 
   useEffect(() => {
     let pastaId = params.pastaId
-    let pastaToShow = dishes.find((pasta) => pasta.id.toString() === pastaId)
-    setPasta(pastaToShow!)
+    let pastaToShow: Dish | undefined = dishes.find((pasta) => pasta.id.toString() === pastaId)
+    setPasta(pastaToShow)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
@@ -26,7 +27,7 @@ const Details = () => {
               <h3>Pasta Details</h3>
               {/* <img src={pasta.image} alt='detail pic' className='my-3' /> */}
               <p>{pasta.description}</p>
-              <DishComments {...pasta} />
+              <DishComments selectedDish={pasta} />
             </>
           ) : (
             <h2>404 - Pasta not found</h2>
